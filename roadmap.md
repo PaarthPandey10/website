@@ -23,7 +23,7 @@ Moving the Gemara project to a stable ecosystem providing the technical foundati
 
 * **Unify Lexicon**: Contribute Gemara definitions to the OpenSSF Glossary to establish shared terminology. *Why: Consistent terminology reduces confusion and improves cross-project collaboration.*
 
-* **Expand Community Materials**: Launch and maintain the `awesome-gemara` repository to centralize community tools, integration scripts, and templates. *Why: Centralized resources reduce duplication and help new adopters discover existing work.*
+* **Expand Community Materials**: Launch and maintain the [`awesome-gemara`](https://github.com/gemaraproj/awesome-gemara) repository to centralize community tools, integration scripts, and templates. *Why: Centralized resources reduce duplication and help new adopters discover existing work.*
 
 * **Publish Model Whitepaper**: Formalize and publish Gemara model for community adoption and standards-track consideration. *Why: Formal documentation enables standards-track discussions and broader industry adoption.*
 

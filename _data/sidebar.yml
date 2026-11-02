@@ -4,6 +4,13 @@
   url: /schema/
 - title: The SDKs
   url: /sdk/
+  children:
+    - title: Go SDK
+      url: /sdk/go-sdk
+    - title: Python SDK
+      url: /sdk/python-sdk
+    - title: React SDK
+      url: /sdk/react-sdk
 - title: Specifications
   url: /specifications/
 - title: Tutorials

@@ -12,5 +12,4 @@ The community-maintained schemas are open to extension or, in extreme cases, mod
 The Gemara Project offers a structured path toward Automated Governance by bridging the divide between high-level industry frameworks and technology-specific safeguards. By providing a common logical basis for GRC Engineering, the project moves beyond abstract concepts to offer a practical, machine-optimized foundation for the modern secure software factory.
 
 - **< Previous Page**: [The Need for Machine-Optimized Documentation Standards](./08-applying)
-<!-- - **> Next Page**: [Gemara SDKs](TODO)-->
 - **> Next Page**: [Authors & Acknowledgments](./10-acknowledgement)

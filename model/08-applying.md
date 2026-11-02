@@ -34,5 +34,4 @@ When a properly designed system such as MCP or AI-skills is overlaid on a machin
 When partnered with an Agent2Agent (A2A) enabled system that allows GRC specialized systems to provide precisely contextualized information to engineering specialized systems in a near deterministic manner, it has been observed that AI systems will require dramatically fewer resources, security tools increase in accuracy, less time is spent on false positives or negatives, and more time is spent delivering real value to the organization.
 
 - **< Previous Page**: [Layer 7](./07.4-Layer-7)
-<!-- - **> Next Page**: [Gemara SDKs](TODO)-->
 - **> Next Page**: [Conclusion](./09-conclusion)

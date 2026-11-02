@@ -23,9 +23,15 @@ SPEC_MD_DIR   := $(GENERATED_DIR)/spec
 SCHEMA_DIR    := schema
 SCHEMA_NAV    := schema-nav.yml
 
-.PHONY: all fetch-openapi genmd gendocs serve build test-links cleanup cleanup-links check-jekyll deps
+.PHONY: all fetch-openapi genmd gendocs serve build test test-tools test-links cleanup cleanup-links check-jekyll deps
 
-all: gendocs test-links cleanup
+all: test gendocs test-links cleanup
+
+test-tools:
+	@echo "  >  Running Go tests in tools/ ..."
+	@cd $(TOOLS_DIR) && go test -v ./...
+
+test: test-tools
 
 deps:
 	@echo "  >  Running bundle install..."

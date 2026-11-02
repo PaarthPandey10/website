@@ -181,3 +181,65 @@ func contains(values []string, want string) bool {
 	}
 	return false
 }
+
+func TestSplitRoots(t *testing.T) {
+	tests := []struct {
+		input string
+		want  []string
+	}{
+		{"", nil},
+		{"   ", nil},
+		{"Root1", []string{"Root1"}},
+		{"Root1, Root2, Root3", []string{"Root1", "Root2", "Root3"}},
+		{"Root1,,  Root2 , ", []string{"Root1", "Root2"}},
+	}
+
+	for _, tt := range tests {
+		got := splitRoots(tt.input)
+		if len(got) != len(tt.want) {
+			t.Fatalf("splitRoots(%q) length = %d, want %d", tt.input, len(got), len(tt.want))
+		}
+		for i := range got {
+			if got[i] != tt.want[i] {
+				t.Errorf("splitRoots(%q)[%d] = %q, want %q", tt.input, i, got[i], tt.want[i])
+			}
+		}
+	}
+}
+
+func TestSlugify(t *testing.T) {
+	tests := []struct {
+		input string
+		want  string
+	}{
+		{"Control Catalog", "control-catalog"},
+		{"Risk-Catalog", "risk-catalog"},
+		{"Security Policy (v1.0)", "security-policy-v10"},
+		{"Simple", "simple"},
+	}
+
+	for _, tt := range tests {
+		if got := slugify(tt.input); got != tt.want {
+			t.Errorf("slugify(%q) = %q, want %q", tt.input, got, tt.want)
+		}
+	}
+}
+
+func TestFormatStatusBadge(t *testing.T) {
+	tests := []struct {
+		status string
+		want   string
+	}{
+		{"experimental", "<span class=\"badge badge-experimental\">Experimental</span>"},
+		{"stable", "<span class=\"badge badge-stable\">Stable</span>"},
+		{"deprecated", "<span class=\"badge badge-deprecated\">Deprecated</span>"},
+		{"unknown", ""},
+		{"", ""},
+	}
+
+	for _, tt := range tests {
+		if got := formatStatusBadge(tt.status); got != tt.want {
+			t.Errorf("formatStatusBadge(%q) = %q, want %q", tt.status, got, tt.want)
+		}
+	}
+}

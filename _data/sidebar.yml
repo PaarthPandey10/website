@@ -4,6 +4,8 @@
   url: /schema/
 - title: The SDKs
   url: /sdk/
+- title: Specifications
+  url: /specifications/
 - title: Tutorials
   url: /tutorials/
   children:

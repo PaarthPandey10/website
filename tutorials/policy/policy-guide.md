@@ -290,5 +290,6 @@ adherence:
 
 - Use the policy in **Layer 5** evaluations to determine whether implementations conform.
 - Use **Layer 7** audit and continuous monitoring to assess policy effectiveness.
+- For tool developers and SDK authors working with Gemara, see the [Tool Specifications](../../specifications/).
 
 See the [Policy schema documentation](https://gemara.openssf.org/schema/policy.html) and [policy.cue](https://github.com/gemaraproj/gemara/blob/main/policy.cue) for the full specification.

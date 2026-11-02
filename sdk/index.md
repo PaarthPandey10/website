@@ -35,3 +35,6 @@ Provides the conceptual foundation. SDK types correspond to elements in the mode
 
 ### [The Schemas](../schema/)
 SDK types are generated from the CUE schemas. The schemas are the source of truth for data structures.
+
+### [The Specifications](../specifications/)
+Tool and resolution specifications define the normative operational algorithms that SDKs and tools implement for downstream consumers.

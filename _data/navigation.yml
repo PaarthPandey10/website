@@ -1,5 +1,7 @@
 - title: Home
   url: /
+- title: Specifications
+  url: /specifications/
 - title: Community
   url: /community/
   children:

@@ -333,3 +333,44 @@ func TestFindMarkdownFiles(t *testing.T) {
 		t.Fatalf("expected 2 markdown files, found %d", len(files))
 	}
 }
+
+func TestFindHTMLContentRanges(t *testing.T) {
+	// Empty tag ranges
+	empty := findHTMLContentRanges("plain text", nil)
+	if len(empty) != 0 {
+		t.Errorf("expected 0 ranges for empty tagRanges, got %d", len(empty))
+	}
+
+	// Simple tags
+	text := "<div>hello world</div>"
+	tagRanges := [][]int{{0, 5}, {16, 22}}
+	ranges := findHTMLContentRanges(text, tagRanges)
+	if len(ranges) != 1 || ranges[0].start != 5 || ranges[0].end != 16 {
+		t.Errorf("expected range (5, 16), got %+v", ranges)
+	}
+
+	// Nested tags
+	nested := "<div><span>inner</span> outside</div>"
+	// <div> is (0,5), <span> is (5,11), </span> is (16,23), </div> is (31,37)
+	nestedTagRanges := [][]int{{0, 5}, {5, 11}, {16, 23}, {31, 37}}
+	nestedRanges := findHTMLContentRanges(nested, nestedTagRanges)
+	if len(nestedRanges) < 1 {
+		t.Errorf("expected nested content ranges, got %+v", nestedRanges)
+	}
+
+	// Self-closing tags should not produce content range
+	selfClosing := "<img src='test.png' />"
+	scTagRanges := [][]int{{0, len(selfClosing)}}
+	scRanges := findHTMLContentRanges(selfClosing, scTagRanges)
+	if len(scRanges) != 0 {
+		t.Errorf("expected 0 content ranges for self-closing tag, got %d", len(scRanges))
+	}
+
+	// Unclosed tag
+	unclosed := "<article>some unclosed text"
+	unclosedTagRanges := [][]int{{0, 9}}
+	unclosedRanges := findHTMLContentRanges(unclosed, unclosedTagRanges)
+	if len(unclosedRanges) != 1 || unclosedRanges[0].start != 9 || unclosedRanges[0].end != len(unclosed) {
+		t.Errorf("expected range (9, %d) for unclosed tag, got %+v", len(unclosed), unclosedRanges)
+	}
+}

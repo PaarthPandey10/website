@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -241,5 +242,80 @@ func TestFormatStatusBadge(t *testing.T) {
 		if got := formatStatusBadge(tt.status); got != tt.want {
 			t.Errorf("formatStatusBadge(%q) = %q, want %q", tt.status, got, tt.want)
 		}
+	}
+}
+
+func TestLoadManifest(t *testing.T) {
+	tempDir := t.TempDir()
+
+	// Missing file error
+	_, err := loadManifest(filepath.Join(tempDir, "nonexistent.json"))
+	if err == nil {
+		t.Error("expected error for missing manifest file, got nil")
+	}
+
+	// Invalid JSON error
+	badJSON := filepath.Join(tempDir, "bad.json")
+	if err := os.WriteFile(badJSON, []byte("invalid json"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	_, err = loadManifest(badJSON)
+	if err == nil {
+		t.Error("expected error for invalid JSON, got nil")
+	}
+
+	// Valid manifest
+	goodJSON := filepath.Join(tempDir, "good.json")
+	content := `{"schema1.cue": ["ControlCatalog", "Policy"], "schema2.cue": ["Risk"]}`
+	if err := os.WriteFile(goodJSON, []byte(content), 0644); err != nil {
+		t.Fatal(err)
+	}
+	m, err := loadManifest(goodJSON)
+	if err != nil {
+		t.Fatalf("unexpected error for valid manifest: %v", err)
+	}
+	if len(m) != 2 || len(m["schema1.cue"]) != 2 {
+		t.Errorf("manifest parsed incorrectly: %+v", m)
+	}
+}
+
+func TestLoadNavFile(t *testing.T) {
+	tempDir := t.TempDir()
+
+	// Missing file error
+	_, err := loadNavFile(filepath.Join(tempDir, "nonexistent.yml"))
+	if err == nil {
+		t.Error("expected error for missing nav file, got nil")
+	}
+
+	// Invalid YAML error
+	badYAML := filepath.Join(tempDir, "bad.yml")
+	if err := os.WriteFile(badYAML, []byte("invalid: [unclosed"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	_, err = loadNavFile(badYAML)
+	if err == nil {
+		t.Error("expected error for invalid YAML, got nil")
+	}
+
+	// Valid nav file
+	goodYAML := filepath.Join(tempDir, "good.yml")
+	navContent := `
+pages:
+  - title: Control Catalog
+    filename: control-catalog.md
+    schemas:
+      - ControlCatalog
+      - Control
+`
+	if err := os.WriteFile(goodYAML, []byte(navContent), 0644); err != nil {
+		t.Fatal(err)
+	}
+	nav, err := loadNavFile(goodYAML)
+	if err != nil {
+		t.Fatalf("unexpected error for valid nav file: %v", err)
+	}
+	if len(nav.Pages) != 1 || nav.Pages[0].Title != "Control Catalog" || len(nav.Pages[0].Schemas) != 2 {
+		t.Errorf("nav parsed incorrectly: %+v", nav)
 	}
 }

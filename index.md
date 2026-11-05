@@ -71,6 +71,7 @@ Choose your starting point based on your needs:
 - **Understanding GRC structure?** Start with **[The Model](./model)** component
 - **Validating documents?** Use **[The Schemas](./schema/)** component
 - **Building tools?** Jump to **[The SDKs](./sdk/)** component
+- **Exploring rendered artifacts?** Try the **[React SDK Live Demo](./sdk/demo.html)**
 
 All three components work together - you'll likely use elements from each as you work with Gemara.
 

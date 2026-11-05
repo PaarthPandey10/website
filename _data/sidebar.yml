@@ -11,6 +11,8 @@
       url: /sdk/python-sdk
     - title: React SDK
       url: /sdk/react-sdk
+    - title: React SDK Demo
+      url: /sdk/demo
 - title: Specifications
   url: /specifications/
 - title: Tutorials

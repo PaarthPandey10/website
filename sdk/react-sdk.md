@@ -7,6 +7,8 @@ The React SDK (`@gemara/react`) provides headless React renderers and TypeScript
 
 **[React Repository →](https://github.com/gemaraproj/gemara-react)** &nbsp;|&nbsp; **[npm Package →](https://www.npmjs.com/package/@gemara/react)** &nbsp;|&nbsp; **[Issue Tracker →](https://github.com/gemaraproj/gemara-react/issues)**
 
+> Explore the interactive [React SDK Live Demo](./demo.html) to see Gemara artifacts rendered in the browser.
+
 ## Installation
 
 `@gemara/react` requires React 18 or newer (`react >= 18`).
